@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <memory>
 #include <ctime>
+#include <iomanip>
 
 const double PI = 3.1415926535897932384626433;
 
@@ -149,7 +150,7 @@ int main() {
         totalRadius += circle->GetRadius();
     }
 
-    std::cout << "Total Radius of Circles: " << totalRadius << std::endl;
+    std::cout << "Total Radius of Circles: " << std::fixed << std::setprecision(2) << totalRadius << std::endl;
 
     return 0;
 }
