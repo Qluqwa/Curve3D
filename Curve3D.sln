@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Curve3D", "Curve3D\Curve3D.vcxproj", "{D03D87E1-E127-4C83-9532-BDC6B809ABBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Debug|x64.ActiveCfg = Debug|x64
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Debug|x64.Build.0 = Debug|x64
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Debug|x86.ActiveCfg = Debug|Win32
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Debug|x86.Build.0 = Debug|Win32
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Release|x64.ActiveCfg = Release|x64
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Release|x64.Build.0 = Release|x64
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Release|x86.ActiveCfg = Release|Win32
+		{D03D87E1-E127-4C83-9532-BDC6B809ABBC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33CEC6A4-6959-4863-A4CB-CD3771D8F365}
+	EndGlobalSection
+EndGlobal
