@@ -3,7 +3,10 @@
 #include <cmath>
 #include <algorithm>
 #include <memory>
-#include <ctime>
+#include <random>
+#include <numeric>
+#include <iomanip>
+#include <stdexcept>
 
 constexpr double PI = 3.14159265358979323846;
 
@@ -19,13 +22,13 @@ public:
     virtual ~Curve3D() = default;
     virtual Point3D getPoint(double t) const = 0;
     virtual Point3D getDerivative(double t) const = 0;
-    virtual void printInfo(double t) const = 0;
+    virtual void printInfo() const = 0;
 };
 
 class Circle : public Curve3D {
     double radius;
 public:
-    Circle(double r) : radius(r) {
+    explicit Circle(double r) : radius(r) {
         if (radius <= 0) throw std::invalid_argument("Radius must be positive");
     }
 
@@ -37,8 +40,8 @@ public:
         return { -radius * sin(t), radius * cos(t), 0.0 };
     }
 
-    void printInfo(double t) const override {
-        std::cout << "Circle (r=" << radius << ")";
+    void printInfo() const override {
+        std::cout << "Circle (radius: " << radius << ")";
     }
 
     double getRadius() const { return radius; }
@@ -60,8 +63,8 @@ public:
         return { -radiusX * sin(t), radiusY * cos(t), 0.0 };
     }
 
-    void printInfo(double t) const override {
-        std::cout << "Ellipse (rx=" << radiusX << ", ry=" << radiusY << ")";
+    void printInfo() const override {
+        std::cout << "Ellipse (radiusX: " << radiusX << ", radiusY: " << radiusY << ")";
     }
 };
 
@@ -81,8 +84,8 @@ public:
         return { -radius * sin(t), radius * cos(t), step / (2 * PI) };
     }
 
-    void printInfo(double t) const override {
-        std::cout << "Helix (r=" << radius << ", step=" << step << ")";
+    void printInfo() const override {
+        std::cout << "Helix (radius: " << radius << ", step: " << step << ")";
     }
 };
 
@@ -104,7 +107,7 @@ int main() {
     try {
         // 1. Create container of random curves
         std::vector<std::shared_ptr<Curve3D>> curves;
-        for (int i = 0; i < 15; ++i) {
+        for (int i = 0; i < 10; ++i) {
             curves.push_back(std::shared_ptr<Curve3D>(createRandomCurve().release()));
         }
 
@@ -112,16 +115,16 @@ int main() {
         const double t = PI / 4;
         std::cout << "Points and derivatives at t=PI/4:\n";
         for (const auto& curve : curves) {
-            curve->printInfo(t);
+            curve->printInfo();
             std::cout << "\nPoint: " << curve->getPoint(t)
-                << ", Derivative: " << curve->getDerivative(t) << "\n\n";
+                << "\nDerivative: " << curve->getDerivative(t) << "\n\n";
         }
 
         // 3. Create second container with circles only
         std::vector<std::shared_ptr<Circle>> circles;
         for (const auto& curve : curves) {
             if (auto circle = dynamic_cast<Circle*>(curve.get())) {
-                circles.emplace_back(std::static_pointer_cast<Circle>(curve));
+                circles.push_back(std::shared_ptr<Circle>(curve, circle));
             }
         }
 
@@ -144,7 +147,19 @@ int main() {
         std::cout << "\nTotal sum of radii: " << std::fixed << std::setprecision(2)
             << total_radius << std::endl;
 
-    std::cout << "Total Radius of Circles: " << totalRadius << std::endl;
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument error: " << e.what() << std::endl;
+        return 1;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Standard exception: " << e.what() << std::endl;
+        return 1;
+    }
+    catch (...) {
+        std::cerr << "Unknown error occurred" << std::endl;
+        return 1;
+    }
 
     return 0;
 }
