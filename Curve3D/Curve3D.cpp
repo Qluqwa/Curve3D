@@ -3,9 +3,7 @@
 #include <cmath>
 #include <algorithm>
 #include <memory>
-#include <random>
-#include <numeric>
-#include <iomanip>
+#include <ctime>
 
 constexpr double PI = 3.14159265358979323846;
 
@@ -146,11 +144,7 @@ int main() {
         std::cout << "\nTotal sum of radii: " << std::fixed << std::setprecision(2)
             << total_radius << std::endl;
 
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
+    std::cout << "Total Radius of Circles: " << totalRadius << std::endl;
 
     return 0;
 }
